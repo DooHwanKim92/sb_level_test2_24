@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>articleBoardTest</title>
+</head>
+<body>
+<nav style="background-color:blue;">
+    <ul>
+        <li style="list-style:none;">
+            <a th:href="@{/article/list}" style="color:#fff; text-decoration:none;">HOME</a>
+        </li>
+        <li style="list-style:none;">
+            <a th:href="@{/user/login}" sec:authorize="isAnonymous()" style="color:#fff; text-decoration:none;">로그인</a>
+        </li>
+        <li style="list-style:none;">
+            <a th:href="@{/user/logout}" sec:authorize="isAuthenticated()" style="color:#fff; text-decoration:none;">로그아웃</a>
+        </li>
+        <li style="list-style:none;">
+            <a th:href="@{/user/signup}" style="color:#fff; text-decoration:none;">회원가입</a>
+        </li>
+    </ul>
+</nav>
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<th:block layout:fragment="content"></th:block>
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+</body>
+</html>
