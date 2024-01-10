@@ -1,7 +1,12 @@
 <html layout:decorate="~{layout}">
     <div layout:fragment="content">
+        <h2>상세페이지</h2>
         <h3 th:text="${article.title}"></h3>
         <p th:text="${article.content}"></p>
+        <span th:if="${article.author != null}" th:text="|작성자:${article.author.username}|"></span>
+        <br>
+        <span th:text="|작성날짜:${#temporals.format(article.createDate,'yyyy-MM-dd HH:mm')}|"></span>
+        <br>
         <a th:href="@{/article/list}">목록</a>
         <a th:href="@{|/article/modify/${article.id}|}"
            th:if="${article.author != null and #authentication.getPrincipal().getUsername() == article.author.username}">수정</a>

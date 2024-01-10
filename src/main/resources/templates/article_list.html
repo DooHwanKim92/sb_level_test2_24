@@ -1,5 +1,19 @@
 <html layout:decorate="~{layout}">
     <div layout:fragment="content">
+        <h4>게시글 목록</h4>
+        <div class="row my-3">
+            <div class="col-6">
+                <a th:href="@{/article/create}" class="btn btn-primary">게시글등록</a>
+            </div>
+            <div class="col-6">
+                <form th:action="@{/article/list}" method="get">
+                    <div class="input-group">
+                        <input type="text" name="kw" id="search_kw" class="form-control" th:value="${kw}">
+                        <button class="btn btn-outline-secondary" type="submit" id="btn_search">검색</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <table border="1">
             <thead>
                 <tr>
@@ -10,14 +24,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="article : ${articleList}">
+                <tr th:each="article, loop : ${articleList}">
                     <td th:text="${article.id}"></td>
                     <td> <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.title}"></a></td>
                     <td th:if="${article.author != null}" th:text="${article.author.username}"></td>
-                    <td th:text="${article.createDate}"></td>
+                    <td th:text="${#temporals.format(article.createDate,'yyyy-MM-dd HH:mm')}"></td>
                 </tr>
             </tbody>
         </table>
-        <a th:href="@{/article/create}">게시글등록</a>
+        <form th:action="@{/article/list}" method="get" id="searchForm">
+            <input type="hidden" id="kw" name="kw" th:value="${kw}">
+            <input type="hidden" id="article" name="article" th:value="${article}">
+        </form>
     </div>
 </html>
